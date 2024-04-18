@@ -4,6 +4,12 @@
   become: yes
   
   tasks:
+    - name: Ensure the destination directory exists
+      file:
+        path: "~/JavaWebApp/target/WebAppCal-0.0.6.war"
+        state: directory
+        mode: '0755'
+    
     - name: Copy WAR file
       become: true
       copy:
