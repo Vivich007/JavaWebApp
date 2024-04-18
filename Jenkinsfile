@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     stages {
-        stage ('') {
+        stage ('Git') {
             steps {
                 git repository
             }
