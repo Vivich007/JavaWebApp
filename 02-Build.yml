@@ -1,0 +1,17 @@
+---
+- name: Build WAR file
+  hosts: n150
+  gather_facts: false
+  tasks:
+    - name: Copy WAR file
+      git:
+        repo: https://github.com/Vivich007/JavaWebApp.git
+        dest: /home/centos/JavaWebApp
+        version: master
+
+    - name: Run Maven build
+      shell: |
+        cd /home/centos/JavaWebApp
+        mvn clean package
+
+... 
