@@ -1,0 +1,12 @@
+---
+- name: Test War file
+  hosts: n150
+  gather_facts: false
+  tasks:
+    
+    - name: Run Maven Test
+      shell: |
+        cd /home/centos/JavaWebApp
+        mvn test
+
+... 
