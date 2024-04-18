@@ -1,0 +1,47 @@
+---
+- name: Install Maven
+  hosts: G2
+  become: yes
+  
+  tasks:
+    
+    - name: Download Apache Maven
+      get_url:
+        url: "https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz"
+        dest: /opt/
+
+    - name: Extract Maven Archive
+      unarchive:
+        src: /opt/apache-maven-3.9.6-bin.tar.gz
+        dest: /opt/
+        remote_src: yes
+
+    - name: Create symbolic link to Maven
+      file:
+        src: /opt/apache-maven-3.9.6
+        dest: /opt/maven
+        state: link
+        force: yes
+    
+  #handlers:
+    #- name: Reload profile
+      #ansible.builtin.command: source /etc/profile 
+    
+    - name: Set Maven environment variables
+      lineinfile:
+        path: "/etc/profile.d/maven.sh"
+        create: yes
+        line: |
+          export MAVEN_HOME=/opt/maven
+          export PATH=${MAVEN_HOME}/bin:${PATH}
+
+    - name: Set executable permission for maven.sh
+      file:
+        path: /etc/profile.d/maven.sh  # Specify the path to the file or directory
+        mode: 0755
+
+    - name: Load Maven environment variables
+      shell: /etc/profile.d/maven.sh
+      when: ansible_os_family == 'RedHat'
+
+... 
