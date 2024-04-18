@@ -24,7 +24,35 @@ pipeline {
                 ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '02-Build.yml', vaultTmpPath: ''
                 
             }    
+        }   
+
+         stage ('Build Test') {
+            agent {label 'Maven-Ansible'}
+            
+            steps {
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '03-Test.yml', vaultTmpPath: ''
+                
+            }    
         }    
 
+        stage ('Deploy War file to Servers') {
+            agent {label 'Maven-Ansible'}
+            
+            steps {
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '05-Deploy.yml', vaultTmpPath: ''
+                
+            }    
+        }    
     }
+
+    post {
+        always {
+            echo 'Send email notification'
+            emailext (
+                to: 'vivich007@gmail.com',
+                subject: "Failed: ${currentBuild.fullDisplayName}",
+                body: "you tried abeg! e no easy."
+            )    
+        }
+    }   
 }
