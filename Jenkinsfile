@@ -1,13 +1,8 @@
 pipeline {
-    agent any
+    agent none
     
     stages {
-        stage ('Git Checkout') {
-            steps {
-                git repository
-            }
-        }
-
+        
         stage ('Install Packages') {
             agent {label 'Maven-Ansible'}
             
