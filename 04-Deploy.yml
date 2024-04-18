@@ -5,8 +5,9 @@
   
   tasks:
     - name: Copy WAR file
+      become: true
       copy:
-        src: '~/JavaWebApp/target/*.war'
+        src: ~/JavaWebApp/target/WebAppCal-0.0.6.war
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
       
