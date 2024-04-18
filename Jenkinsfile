@@ -35,10 +35,11 @@ pipeline {
             }    
         }    
 
-        stage ('Deploy War file to Servers') {
+        stage ('Deploy') {
             agent {label 'Maven-Ansible'}
             
             steps {
+                echo 'Deploy War file to Servers'
                 ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '05-Deploy.yml', vaultTmpPath: ''
                 
             }    
