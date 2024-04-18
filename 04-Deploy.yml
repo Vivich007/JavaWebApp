@@ -1,0 +1,22 @@
+---
+- name: Deploy WAR file to Tomcat Servers
+  hosts: G1
+  become: yes
+  
+  tasks:
+    - name: Copy WAR file
+      copy:
+        src: /home/centos/JavaWebApp/WebAppCal-0.0.6.war
+        dest: /opt/apache-tomcat-9.0.54/webapps/
+        remote_src: yes
+      
+    #- name: Restart Tomcat
+     # service:
+      #  name: apache-tomcat
+       # state: restarted
+
+    - name: Start Tomcat Service
+      shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
+   
+          
+... 
