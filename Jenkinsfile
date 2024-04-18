@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo 'Install required packages'
                 ansiblePlaybook(
-                    playbook: '01-Install.yml'
+                    playbook: '01-Install.yml',
                     inventory:'Hosts.ini'
                 )
         }    
