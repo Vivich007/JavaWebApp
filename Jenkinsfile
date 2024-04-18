@@ -15,6 +15,7 @@ pipeline {
                     playbook: '01-Install.yml',
                     inventory:'Hosts.ini'
                 )
+            }    
         }    
     }
 }
