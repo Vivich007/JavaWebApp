@@ -5,8 +5,8 @@
   
   tasks:
     - name: Copy WAR file
-      synchronize:
-        src: /home/centos/JavaWebApp/target/*.war
+      copy:
+        src: "/home/centos/JavaWebApp/target/*.war"
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
       
