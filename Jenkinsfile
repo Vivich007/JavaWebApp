@@ -11,8 +11,10 @@ pipeline {
             agent {label 'Maven-Ansible'}
             steps {
                 echo 'Install required packages'
-                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '01-Install.yml', vaultTmpPath: ''
-            }
+                ansiblePlaybook(
+                    playbook: '01-Install.yml'
+                    inventory:'Hosts.ini'
+                )
         }    
     }
 }
