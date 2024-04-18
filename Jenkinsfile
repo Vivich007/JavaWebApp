@@ -13,21 +13,16 @@ pipeline {
             
             steps {
                 echo 'Install required packages'
-                ansiblePlaybook(
-                    playbook: '01-Install.yml',
-                    inventory:'Hosts.ini'
-                )
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '01-Install.yml', vaultTmpPath: ''
+                
             }    
         }   
-        stage ('maven Build') {
+        stage ('Maven Build') {
             agent {label 'Maven-Ansible'}
             
             steps {
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '02-Build.yml', vaultTmpPath: ''
                 
-                ansiblePlaybook(
-                    playbook: '02-MavenConf.yml',
-                    inventory:'Hosts.ini'
-                )
             }    
         }    
 
