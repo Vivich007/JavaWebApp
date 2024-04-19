@@ -6,14 +6,14 @@
   tasks:
     - name: Ensure the destination directory exists
       file:
-        path: "~/JavaWebApp/target/WebAppCal-0.0.6.war"
+        path: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
         state: directory
         mode: '0755'
     
     - name: Copy WAR file
       become: true
       copy:
-        src: ~/JavaWebApp/target/WebAppCal-0.0.6.war
+        src: /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
 
