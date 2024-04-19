@@ -18,9 +18,8 @@
         remote_src: yes
 
     - name: Set permissions for the WAR file
-      ansible.builtin.file:
+      file:
         path: /opt/apache-tomcat-9.0.54/webapps/WebAppCal-0.0.6.war"
-        owner: G1
         mode: "0755"  
     #- name: Restart Tomcat
      # service:
