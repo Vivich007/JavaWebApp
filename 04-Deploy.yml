@@ -25,9 +25,6 @@
      # service:
       #  name: apache-tomcat
        # state: restarted
-    - name: Secure copy war file to servers
-      shell:
-        scp --o StrictHostKeyChecking=no /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war G1:~/apache-tomcat-9.0.54/webapps/
 
     - name: Start Tomcat Service
       shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
