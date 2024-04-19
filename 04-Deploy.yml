@@ -20,6 +20,8 @@
     - name: Set permissions for the WAR file
       file:
         path: /opt/apache-tomcat-9.0.54/webapps/*.war"
+        owner: admin
+        group: G1
         mode: "0644"  
     #- name: Restart Tomcat
      # service:
