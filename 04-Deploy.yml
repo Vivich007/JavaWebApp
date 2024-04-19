@@ -22,7 +22,7 @@
         path: /opt/apache-tomcat-9.0.54/webapps/*.war"
         owner: admin
         group: G1
-        mode: "0644"  
+        mode: "0755"  
     #- name: Restart Tomcat
      # service:
       #  name: apache-tomcat
