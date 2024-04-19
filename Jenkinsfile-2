@@ -5,34 +5,28 @@ pipeline {
        
         stage ('Install Packages') {
             agent {label 'n150'}
+            
             steps {
                 echo 'Install required packages'
-                ansiblePlaybook(
-                    playbook: '01-Install.yml',
-                    inventory: 'Hosts.ini'
-                )
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '01-Install.yml', vaultTmpPath: ''
                 
             }    
         }   
         stage ('Maven Build') {
             agent {label 'n150'}
+            
             steps {
-                echo 'Build Maven Package'
-                ansiblePlaybook(
-                    playbook: '02-Build.yml',
-                    inventory: 'Hosts.ini'
-                )
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '02-Build.yml', vaultTmpPath: ''
+                
             }    
         }   
 
          stage ('Build Test') {
             agent {label 'n150'}
+            
             steps {
-                echo 'Test Maven Build'
-                ansiblePlaybook(
-                    playbook: '03-Test.yml',
-                    inventory: 'Hosts.ini'
-                )  
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '03-Test.yml', vaultTmpPath: ''
+                
             }    
         }    
 
@@ -40,11 +34,9 @@ pipeline {
             agent {label 'n150'}
             
             steps {
-                echo 'Deploy WAR files'
-                ansiblePlaybook(
-                    playbook: '04-Deploy.yml',
-                    inventory: 'Hosts.ini'
-                )
+                echo 'Deploy War file to Servers'
+                ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '05-Deploy.yml', vaultTmpPath: ''
+                
             }    
         }    
     }
