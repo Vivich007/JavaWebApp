@@ -54,8 +54,8 @@ pipeline {
             echo 'Send email notification'
             emailext (
                 to: 'vivich007@gmail.com',
-                subject: "Failed: ${currentBuild.fullDisplayName}",
-                body: "you tried abeg! e no easy."
+                subject: "${currentBuild.fullDisplayName}",
+                body: "Check Buil Job."
             )    
         }
     }   
