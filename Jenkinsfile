@@ -1,10 +1,16 @@
 pipeline {
     agent any
-    tools {ansible 'Maven-Ansible'}
+    
     stages {
         
+        stage('Git Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
         stage ('Install Packages') {
-            
+            agent {label 'ansible'}
             
             steps {
                 echo 'Install required packages'
@@ -13,7 +19,7 @@ pipeline {
             }    
         }   
         stage ('Maven Build') {
-            agent {label 'Maven-Ansible'}
+            agent {label 'ansible'}
             
             steps {
                 ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '02-Build.yml', vaultTmpPath: ''
@@ -22,7 +28,7 @@ pipeline {
         }   
 
          stage ('Build Test') {
-            agent {label 'Maven-Ansible'}
+            agent {label 'ansible'}
             
             steps {
                 ansiblePlaybook credentialsId: 'Ansible-Project', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'Hosts.ini', playbook: '03-Test.yml', vaultTmpPath: ''
@@ -31,7 +37,7 @@ pipeline {
         }    
 
         stage ('Deploy') {
-            agent {label 'Maven-Ansible'}
+            agent {label 'ansible'}
             
             steps {
                 echo 'Deploy War file to Servers'
