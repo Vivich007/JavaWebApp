@@ -2,12 +2,7 @@ pipeline {
     agent any
     
     stages {
-        stage ('Git') {
-            steps {
-                Git Checkout
-            }
-        }
-
+       
         stage ('Install Packages') {
             agent {label 'n150'}
             
