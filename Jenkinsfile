@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    
+    tools {ansible 'Maven-Ansible'}
     stages {
         
         stage ('Install Packages') {
-            agent {label 'Maven-Ansible'}
+            
             
             steps {
                 echo 'Install required packages'
