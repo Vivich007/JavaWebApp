@@ -4,36 +4,24 @@
   become: yes
   
   tasks:
-
-    - name: Change ownership recursively
-      become: yes  # This ensures the task runs with elevated privileges (sudo)
-      file:
-        path: /opt/apache-tomcat-9.0.54/
-        owner: ubuntu
-        group: ubuntu
-        recurse: yes
-      when: ansible_distribution == 'Ubuntu'
-
-    - name: Change ownership recursively
-      become: yes  # This ensures the task runs with elevated privileges (sudo)
-      file:
-        path: /opt/apache-tomcat-9.0.54/
+    
+    - name: Copy the WAR file
+      ansible.builtin.copy:
+        src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
+        remote_src: yes
         owner: centos
         group: centos
-        recurse: yes
+        mode: "0644"
       when: ansible_distribution == 'CentOS'
 
-    - name: Copy WAR file
-      become: true
-      copy:
-        src: /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war
-        dest: /opt/apache-tomcat-9.0.54/webapps/
+    - name: Copy the WAR file
+      ansible.builtin.copy:
+        src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
         remote_src: yes
-
-    #- name: Restart Tomcat
-     # service:
-      #  name: apache-tomcat
-       # state: restarted
+        owner: ubuntu
+        group: ubuntu
+        mode: "0644"
+      when: ansible_distribution == 'Ubuntu'
 
     - name: Start Tomcat Service
       shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
