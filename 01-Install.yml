@@ -47,8 +47,8 @@
       remote_src: yes
 
    name: Move files to the /opt/tomcat directory
-      become: yes
-      shell: "mv -un /opt/apache-tomcat-9.0.54/* /opt/tomcat/"
+    become: yes
+    shell: "mv -un /opt/apache-tomcat-9.0.54/* /opt/tomcat/"
 
   - name: Set permissions for the WAR file
     file:
