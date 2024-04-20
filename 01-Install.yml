@@ -47,10 +47,10 @@
       remote_src: yes
 
   - name: Set permissions for the WAR file
-      file:
-        path: /opt/tomcat
-        mode: "0755"
-        recurse: yes
+    file:
+      path: /opt/tomcat
+      mode: "0755"
+      recurse: yes
 
   - name: Configure Tomcat Users
     template:
