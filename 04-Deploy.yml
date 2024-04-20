@@ -8,6 +8,7 @@
     - name: Copy the WAR file
       ansible.builtin.copy:
         src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
+        dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
         owner: centos
         group: centos
@@ -17,6 +18,7 @@
     - name: Copy the WAR file
       ansible.builtin.copy:
         src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
+        dest: /opt/apache-tomcat-9.0.54/webapps/ 
         remote_src: yes
         owner: ubuntu
         group: ubuntu
