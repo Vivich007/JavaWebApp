@@ -10,20 +10,7 @@
         src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
-        owner: centos
-        group: centos
-        mode: "0644"
-      when: ansible_distribution == 'CentOS'
-
-    - name: Copy the WAR file
-      ansible.builtin.copy:
-        src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
-        dest: /opt/apache-tomcat-9.0.54/webapps/ 
-        remote_src: yes
-        owner: ubuntu
-        group: ubuntu
-        mode: "0644"
-      when: ansible_distribution == 'Ubuntu'
+    
 
     - name: Start Tomcat Service
       shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
