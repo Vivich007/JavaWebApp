@@ -6,9 +6,8 @@
   tasks:
     
     - name: Copy the WAR file
-      ansible.builtin.copy:
-        src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
-        dest: /opt/apache-tomcat-9.0.54/webapps/
+      ansible.builtin.shell:
+        cmd:  scp -i plank.pem /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war {{ G1 }}:/opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
         backup: yes
     
