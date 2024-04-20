@@ -10,7 +10,7 @@
         src: "/home/centos/JavaWebApp/target/WebAppCal-0.0.6.war"
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
-        backup: yes
+        force: no
     
 
     - name: Start Tomcat Service
