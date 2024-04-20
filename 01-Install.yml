@@ -36,7 +36,6 @@
       dest: /opt/
 
   - name: Create a Directory to extract tomcat into
-      become: yes
       file:
         path: /opt/tomcat
         state: directory
