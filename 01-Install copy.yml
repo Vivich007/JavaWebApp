@@ -41,12 +41,6 @@
       dest: /opt/
       remote_src: yes
 
-  - name: Set permissions for the WAR file
-    file:
-      path: /opt/apache-tomcat-9.0.54
-      mode: "0755"
-      recurse: yes
-
   - name: Configure Tomcat Users
     template:
       src: tomcat-users.xml.j2
