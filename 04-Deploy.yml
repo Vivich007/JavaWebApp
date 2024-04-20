@@ -7,7 +7,7 @@
 
     - name: Set permissions for the WAR file
       file:
-        path: /opt/apache-tomcat-9.0.54/webapps/WebAppCal-0.0.6.war
+        path: /opt/apache-tomcat-9.0.54/webapps/
         mode: "0755"
         recurse: yes
 
