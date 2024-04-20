@@ -14,7 +14,14 @@
     - name: Copy WAR file
       become: true
       copy:
-        src: /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war WebAppCal-0.0.6
+        src: /home/centos/JavaWebApp/target/WebAppCal-0.0.6.war
+        dest: /opt/apache-tomcat-9.0.54/webapps/
+        remote_src: yes
+    
+    - name: Copy WAR file
+      become: true
+      copy:
+        src: /home/centos/JavaWebApp/target/WebAppCal-0.0.6
         dest: /opt/apache-tomcat-9.0.54/webapps/
         remote_src: yes
 
