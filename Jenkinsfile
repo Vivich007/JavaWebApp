@@ -55,7 +55,7 @@ pipeline {
             emailext (
                 to: 'vivich007@gmail.com',
                 subject: "${currentBuild.fullDisplayName}",
-                body: "Check Buil Job."
+                body: "Check Build Job."
             )    
         }
     }   
