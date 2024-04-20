@@ -30,21 +30,25 @@
       state: present
     when: ansible_os_family == 'Debian'
 
-  - name: Download Tomcat
-    get_url:
-      url: "https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz"
-      dest: /opt/
-
   - name: Create a Directory to extract tomcat into
     file:
       path: /opt/tomcat
       state: directory
-        
+
+  - name: Download Tomcat
+    get_url:
+      url: "https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz"
+      dest: /opt/
+      
   - name: Extract Tomcat
     unarchive:
       src: /opt/apache-tomcat-9.0.54.tar.gz
-      dest: /opt/tomcat
+      dest: /opt/
       remote_src: yes
+
+   name: Move files to the /opt/tomcat directory
+      become: yes
+      shell: "mv -un /opt/apache-tomcat-9.0.54/* /opt/tomcat/"
 
   - name: Set permissions for the WAR file
     file:
@@ -55,14 +59,14 @@
   - name: Configure Tomcat Users
     template:
       src: tomcat-users.xml.j2
-      dest: /opt/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml
+      dest: /opt/tomcat/conf/tomcat-users.xml
   
   - name: Start Tomcat Service
-    shell: nohup /opt/tomcat/apache-tomcat-9.0.54/bin/startup.sh &
+    shell: nohup /opt/tomcat/bin/startup.sh &
     when: ansible_os_family == 'RedHat'
 
   - name: Start Tomcat Service
-    shell: nohup /opt/tomcat/apache-tomcat-9.0.54/bin/startup.sh &
+    shell: nohup /opt/tomcat/bin/startup.sh &
     when: ansible_os_family == 'Debian'
 
 ... 
