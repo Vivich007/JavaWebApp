@@ -5,6 +5,24 @@
   
   tasks:
 
+    - name: Change ownership recursively
+      become: yes  # This ensures the task runs with elevated privileges (sudo)
+      file:
+        path: /opt/apache-tomcat-9.0.54/
+        owner: ubuntu
+        group: ubuntu
+        recurse: yes
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: Change ownership recursively
+      become: yes  # This ensures the task runs with elevated privileges (sudo)
+      file:
+        path: /opt/apache-tomcat-9.0.54/
+        owner: centos
+        group: centos
+        recurse: yes
+      when: ansible_distribution == 'CentOS'
+
     - name: Copy WAR file
       become: true
       copy:
