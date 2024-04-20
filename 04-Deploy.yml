@@ -5,12 +5,6 @@
   
   tasks:
 
-    - name: Set permissions for the WAR file
-      file:
-        path: /opt/apache-tomcat-9.0.54
-        mode: "0755"
-        recurse: yes
-
     - name: Copy WAR file
       become: true
       copy:

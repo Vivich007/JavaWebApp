@@ -35,23 +35,35 @@
       url: "https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz"
       dest: /opt/
 
+  - name: Create a Directory to extract tomcat into
+      become: yes
+      file:
+        path: /opt/tomcat
+        state: directory
+        
   - name: Extract Tomcat
     unarchive:
       src: /opt/apache-tomcat-9.0.54.tar.gz
-      dest: /opt/
+      dest: /opt/tomcat
       remote_src: yes
+
+  - name: Set permissions for the WAR file
+      file:
+        path: /opt/tomcat
+        mode: "0755"
+        recurse: yes
 
   - name: Configure Tomcat Users
     template:
       src: tomcat-users.xml.j2
-      dest: /opt/apache-tomcat-9.0.54/conf/tomcat-users.xml
+      dest: /opt/tomcat/apache-tomcat-9.0.54/conf/tomcat-users.xml
   
   - name: Start Tomcat Service
-    shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
+    shell: nohup /opt/tomcat/apache-tomcat-9.0.54/bin/startup.sh &
     when: ansible_os_family == 'RedHat'
 
   - name: Start Tomcat Service
-    shell: nohup /opt/apache-tomcat-9.0.54/bin/startup.sh &
+    shell: nohup /opt/tomcat/apache-tomcat-9.0.54/bin/startup.sh &
     when: ansible_os_family == 'Debian'
 
 ... 
